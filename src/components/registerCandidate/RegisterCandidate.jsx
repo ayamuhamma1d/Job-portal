@@ -8,28 +8,27 @@ const RegisterCandidate = () => {
   const { register, handleSubmit, setValue, formState: { errors } } = useForm();
   const [skills, setSkills] = useState([]);
 
- const onFormSubmit = (data) => {
-  console.log(data);
+  const onFormSubmit = (data) => {
+    const candidates = JSON.parse(localStorage.getItem('candidatesData')) || [];
+    const updatedCandidatesData = [...candidates, { ...data, skills }];
 
-  const candidates = JSON.parse(localStorage.getItem('candidatesData')) || [];
-  const updatedCandidatesData = [...candidates, { ...data, skills }];
+    if (data.name && data.email && data.role && (skills.length > 0 || !errors.skills)) {
+      localStorage.setItem('candidatesData', JSON.stringify(updatedCandidatesData));
+      setValue('name', '');
+      setValue('email', '');
+      setValue('role', '');
+      setValue('skills', '');
+      setSkills([]);
+    }
+  };
 
-  if (data.name && data.email && data.password && data.role && (skills.length > 0 || !errors.skills)) {
-    localStorage.setItem('candidatesData', JSON.stringify(updatedCandidatesData));
-    setValue('name', '');
-    setValue('email', '');
-    setValue('role', '');
-    setValue('skills', '');
-    setSkills([]);
-  }
-};
   const handleAddSkill = () => {
     const skillsInput = document.getElementById('skills');
     if (skillsInput) {
       const newSkill = skillsInput.value;
       if (newSkill.trim() !== '') {
         setSkills((prevSkills) => [...prevSkills, newSkill]);
-        setValue('skills', [...skills, newSkill]); 
+        setValue('skills', [...skills, newSkill]);
         skillsInput.value = '';
       }
     }
@@ -52,7 +51,7 @@ const RegisterCandidate = () => {
           <Form.Control type="text" placeholder="Role" {...register('role', { required: true })} />
           {errors?.role?.type === "required" && <p className='alert my-2 alert-danger'>Role is required</p>}
         </Form.Group>
-        <Form.Group className="mb-3" >
+        <Form.Group className="mb-3">
           <div className="d-flex">
             <Form.Control type="text" placeholder="Skills" {...register('skills', { required: !skills.length })} id="skills" />
             <Button className="bg-black border-0 add_btn ms-2" type="button" onClick={handleAddSkill}>
@@ -68,7 +67,7 @@ const RegisterCandidate = () => {
           </div>
           {errors?.skills?.type === 'required' && <p className="alert my-2 alert-danger">At least one skill is required</p>}
         </Form.Group>
-    
+
         <Button className="bg-black border-0 d-block" type="submit">
           Submit
         </Button>
