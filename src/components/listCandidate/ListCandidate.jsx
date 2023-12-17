@@ -1,23 +1,19 @@
 import React, { useState } from 'react';
 import { Container, Badge, Button } from 'react-bootstrap';
-
 const ListCandidate = () => {
   const candidatesData = JSON.parse(localStorage.getItem('candidatesData')) || [];
   const [candidates, setCandidates] = useState(candidatesData);
   const [search, setSearch] = useState('');
-
   const handleSearch = () => {
     const findCandidate = candidatesData.filter((candidate) =>
       candidate.skills.some((skill) => skill.toLowerCase().includes(search.toLowerCase()))
     );
     setCandidates(findCandidate);
   };
-
   const handleListAll = () => {
     setCandidates(candidatesData);
     setSearch('');
   };
-
   return (
     <Container className='py-5'>
       <div className="search d-flex align-items-center justify-content-center mb-4">
