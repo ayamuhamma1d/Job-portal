@@ -1,12 +1,40 @@
-import React from 'react';
-import { Container, Badge } from 'react-bootstrap';
+import React, { useState } from 'react';
+import { Container, Badge, Button } from 'react-bootstrap';
 
 const ListCandidate = () => {
-  const candidates = JSON.parse(localStorage.getItem('candidatesData')) || [];
+  const candidatesData = JSON.parse(localStorage.getItem('candidatesData')) || [];
+  const [candidates, setCandidates] = useState(candidatesData);
+  const [search, setSearch] = useState('');
+
+  const handleSearch = () => {
+    const findCandidate = candidatesData.filter((candidate) =>
+      candidate.skills.some((skill) => skill.toLowerCase().includes(search.toLowerCase()))
+    );
+    setCandidates(findCandidate);
+  };
+
+  const handleListAll = () => {
+    setCandidates(candidatesData);
+    setSearch('');
+  };
 
   return (
     <Container className='py-5'>
-      
+      <div className="search d-flex align-items-center justify-content-center mb-4">
+        <input
+          type="search"
+          className='form-control w-50 '
+          placeholder='Search skills'
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+        />
+        <Button className="bg-black border-0 ms-2" onClick={handleSearch}>
+          Search
+        </Button>
+        <Button className="bg-black border-0 ms-2" onClick={handleListAll}>
+          List All
+        </Button>
+      </div>
       <div className="row g-3 justify-content-center align-items-center">
         {candidates.length > 0 ? (
           candidates.map((candidate, index) => (
