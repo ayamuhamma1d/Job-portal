@@ -3,7 +3,6 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { useForm } from 'react-hook-form';
 import { useState } from 'react';
-
 const RegisterCandidate = () => {
   const { register, handleSubmit, setValue, formState: { errors } } = useForm();
   const [skills, setSkills] = useState([]);
@@ -104,7 +103,7 @@ const RegisterCandidate = () => {
           Reset
         </Button>
       </div>
-        <p className='text-danger text-center'>{emailExist}</p>
+        <p className='text-center'>{emailExist}</p>
 
       </Form>
     </Container>
