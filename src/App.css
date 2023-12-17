@@ -1,7 +1,9 @@
 body{
     font-family: 'Times New Roman', Times, serif !important;
 }
-
+img{
+    width: 100%;
+}
 .add_btn{
     font-size: 14px !important;
 }

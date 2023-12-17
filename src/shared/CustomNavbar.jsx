@@ -4,10 +4,8 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import './customNavbar.css';
 import { Link, useLocation } from 'react-router-dom';
-
 const CustomNavbar = () => {
   const location = useLocation();
-
   return (
     <Navbar expand="lg" className="bg-transparent">
       <Container fluid>
@@ -22,9 +20,9 @@ const CustomNavbar = () => {
             </Link>
             <Link
               to={location.pathname === '/register-candidate' ? '/list-candidate':   '/register-candidate'}
-              className="btn bg-black text-white rounded-2 mx-2 text-decoration-none"
+              className="btn bg-black text-white rounded-2 mx-2 text-decoration-none "
             >
-              {location.pathname === '/register-candidate' ? 'Candidate List' : 'Candidate Registration '}
+              {location.pathname === '/register-candidate' ? 'CandidateList' : 'CandidateRegistration '}
             </Link>
           </Nav>
         </Navbar.Collapse>
@@ -32,5 +30,4 @@ const CustomNavbar = () => {
     </Navbar>
   );
 };
-
 export default CustomNavbar;
