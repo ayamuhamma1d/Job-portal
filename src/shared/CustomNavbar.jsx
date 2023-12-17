@@ -9,9 +9,9 @@ const CustomNavbar = () => {
   return (
     <Navbar expand="lg" className="bg-transparent">
       <Container fluid>
-        <Navbar.Brand href="#home" className="fw-bold fs-2 text text-center offset-4 col-md-4">
+        <Link to="./home"  className="fw-bold fs-2 text text-center offset-4 col-md-4 text-decoration-none text-black">
           Job Portal
-        </Navbar.Brand>
+        </Link>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="col-md-4 align-items-center ">
